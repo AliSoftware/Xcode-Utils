@@ -1,0 +1,188 @@
+(
+    //
+    // Objective-C language macros (they also show up for Objective-C++)
+    //
+    {
+        Identifier = objccustom;
+        Name = "iPhone & More";
+        IsMenu = YES;
+        DefaultSettings = {
+            PreExpressionsSpacing = " ";
+            InExpressionsSpacing = "";
+            BlockSeparator = " ";
+            PostBlockSeparator = "\n";
+        };
+        ComputerLanguages = ( "c.objc", "c.objcpp" );
+        IncludeContexts = ( "xcode.lang.objc" );
+        ExcludeContexts = ( "xcode.lang.string", "xcode.lang.character", "xcode.lang.comment", "xcode.lang.c.preprocessor" );
+    },
+   
+        {
+            Identifier = objc.touch;
+            BasedOn = objccustom;
+            IsMenuItem = YES;
+            OnlyAtBOL = YES;
+            Name = "iPhone Touch Events Definitions";
+            TextString = "\n/////////////////////////////////////////////////////////////////////////////
+// MARK: -
+// MARK: Touch Events Management
+/////////////////////////////////////////////////////////////////////////////
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event\n{\n\tUITouch* touch = [touches anyObject];\n\t<#statements#>\n}\n
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event\n{\n\tUITouch* touch = [touches anyObject];\n\t<#statements#>\n}\n
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event\n{\n\tUITouch* touch = [touches anyObject];\n\t<#statements#>\n}\n
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event\n{\n\t<#statements#>\n}
+
+// MARK: -
+/////////////////////////////////////////////////////////////////////////////\n";
+            CompletionPrefix = "touch";
+            IncludeContexts = ( "xcode.lang.objc.implementation" );
+            ExcludeContexts = ( "xcode.lang.objc.block" );
+        },
+                
+        {
+            Identifier = objc.array.iteration.enum;
+            BasedOn = objccustom;
+            IsMenuItem = YES;
+            OnlyAtBOL = YES;
+            Name = "Array NSEnumerator Loop";
+            TextString = "	NSEnumerator* e = [<#array#> objectEnumerator];
+	id obj;
+	while( (obj = [e nextObject]) != nil )
+	{
+		<#!statements!#>
+	}
+";
+            CompletionPrefix = "nsenum";
+            IncludeContexts = ( "xcode.lang.objc.block" );
+        },
+        
+        {
+            Identifier = objc.view.init;
+            BasedOn = objccustom;
+            IsMenuItem = YES;
+            OnlyAtBOL = YES;
+            Name = "initWithFrame & initWithCoder Definitions";
+            TextString = "
+/////////////////////////////////////////////////////////////////////////////
+// MARK: -
+// MARK: Init/Dealloc
+/////////////////////////////////////////////////////////////////////////////
+
+- (id) initWithFrame:(CGRect)frame
+{
+	self = [super initWithFrame:frame];
+	if (self != nil) {
+		[self commonInit];
+	}
+	return self;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+	self = [super initWithCoder:decoder];
+	if (self != nil) {
+		[self commonInit];
+	}
+	return self;
+}
+
+- (void) commonInit
+{
+	<#!init statements!#>
+}
+
+- (void)dealloc
+{
+	<#dealloc statements#>
+	[super dealloc];
+}
+";
+            CompletionPrefix = "initWith";
+            IncludeContexts = ( "xcode.lang.objc.implementation" );
+        },
+        
+        {
+            Identifier = objc.comment.slashline;
+            BasedOn = objccustom;
+            IsMenuItem = YES;
+            OnlyAtBOL = YES;
+            Name = "//////...///";
+            TextString = "/////////////////////////////////////////////////////////////////////////////\n";
+            CompletionPrefix = "csep";
+            IncludeContexts = ( "xcode.lang.objc" );
+        },
+
+         {
+            Identifier = objc.comment.starline;
+            BasedOn = objccustom;
+            IsMenuItem = YES;
+            OnlyAtBOL = YES;
+            Name = "/*****...**/";
+            TextString = "/***************************************************************************/\n";
+            CompletionPrefix = "csep";
+            IncludeContexts = ( "xcode.lang.objc" );
+        },
+                
+        {
+            Identifier = objc.comment.separator;
+            BasedOn = objccustom;
+            IsMenuItem = YES;
+            OnlyAtBOL = YES;
+            Name = "MARK: - (line in 'Methods' menu)";
+            TextString = "\n\n/////////////////////////////////////////////////////////////////////////////
+// MARK: -
+/////////////////////////////////////////////////////////////////////////////\n\n";
+            CompletionPrefix = "csepmark";
+            IncludeContexts = ( "xcode.lang.objc" );
+        },
+        
+        
+        {
+            Identifier = objc.mark.block;
+            BasedOn = objccustom;
+            IsMenuItem = YES;
+            OnlyAtBOL = YES;
+            Name = "Insert a separator + mark name in Methods menu";
+            TextString = "\n\n/////////////////////////////////////////////////////////////////////////////
+// MARK: -
+// MARK: <#name#>
+/////////////////////////////////////////////////////////////////////////////\n";
+            CompletionPrefix = "mark";
+            IncludeContexts = ( "xcode.lang.objc","xcode.lang.objc.interface","xcode.lang.objc.implementation" );
+        },
+        
+        {
+            Identifier = objc.mark.simple;
+            BasedOn = objccustom;
+            IsMenuItem = YES;
+            OnlyAtBOL = YES;
+            Name = "Insert a (simple) mark in Methods menu";
+            TextString = "// MARK: <#name#>";
+            CompletionPrefix = "mark:";
+            IncludeContexts = ( "xcode.lang.objc" );
+        },
+
+        {
+            Identifier = objccustom.todo;
+            BasedOn = objccustom;
+            IsMenuItem = YES;
+            OnlyAtBOL = YES;
+            Name = "Generic 'implementation TODO' NSLog";
+            TextString = "NSLog(@\"[%@ %@] : Not implemented yet.\",[self class], NSStringFromSelector(_cmd)); // TODO: Implement this";
+            CompletionPrefix = "todo";
+            IncludeContexts = ( "xcode.lang.objc.block" );
+        },
+        
+        {
+            Identifier = objccustom.trace;
+            BasedOn = objccustom;
+            IsMenuItem = YES;
+            OnlyAtBOL = YES;
+            Name = "Trace Method name in NSLog";
+            TextString = "NSLog(@\"[<%@ %p> %@]\",[self class],self, NSStringFromSelector(_cmd));";
+            CompletionPrefix = "trace";
+            IncludeContexts = ( "xcode.lang.objc.block" );
+        },
+
+)

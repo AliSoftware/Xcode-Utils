@@ -1,0 +1,6 @@
+This directory contain some useful File Tempates to add to Xcode, so that you can create new .h/.m files based on those templates.
+
+To install those File Templates on your mac, copy the templates directory into:
+ ~/Library/Application Support/Developer/Shared/Xcode/File Templates 
+
+Note that the ".pbfiletemplate" directory should be in a subdirectory (e.g. "Cocoa Class") of the "File Templates" directory to be visible in the Xcode's New File wizard.

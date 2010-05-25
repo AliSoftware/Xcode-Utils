@@ -1,0 +1,9 @@
+This directory contain some useful TextMacros to add to Xcode, so that you can have some code snippets and autocomplete features added to your Xcode source code editor.
+
+For example, Text Macros allows you to type some "completion prefix" (the beginning of a word of your choice) and Xcode will propose some code snippets to insert directly. As those code snippets can be multiple lines of source code, this allow your to avoid retyping the same code extracts all the time. You can also have placeholders in those code snippets inserted using the Text Macros, so that it is easy for you to replace it with actual values.
+
+Note that Xcode already embed some Text Macros. For example, you can already type the word "init" anywhere in your .m source file when you would insert a method definition (so between @implementation and @end but outside a method definition of course) and then hit the escape key and Xcode will propose to insert the template for the "-(id)init" method definition, ready for customisation.
+
+
+To install those File Templates on your mac, copy the .xctxtmacro file into:
+ ~/Library/Application Support/Developer/Shared/Xcode/Specifications

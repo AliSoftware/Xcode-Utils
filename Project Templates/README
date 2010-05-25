@@ -1,0 +1,6 @@
+This directory contain some useful Project Tempates to add to Xcode, so that you can create new Xcode projects based on those templates.
+
+To install those Project Templates on your mac, copy the templates directory into:
+ ~/Library/Application Support/Developer/Shared/Xcode/Project Templates 
+
+Note that the directory containing the project template should itself be in a subdirectory (e.g. "Cocoa Application") of the "Project Templates" directory to be visible in the Xcode's New Project wizard.
