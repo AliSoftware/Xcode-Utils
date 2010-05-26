@@ -5,5 +5,5 @@ For example, Text Macros allows you to type some "completion prefix" (the beginn
 Note that Xcode already embed some Text Macros. For example, you can already type the word "init" anywhere in your .m source file when you would insert a method definition (so between @implementation and @end but outside a method definition of course) and then hit the escape key and Xcode will propose to insert the template for the "-(id)init" method definition, ready for customisation.
 
 
-To install those File Templates on your mac, copy the .xctxtmacro file into:
+To install those Text Macros on your mac, copy the .xctxtmacro file into:
  ~/Library/Application Support/Developer/Shared/Xcode/Specifications
