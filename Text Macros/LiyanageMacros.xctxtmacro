@@ -1,0 +1,551 @@
+/**
+    Marc Liyanage Xcode text macro specifications
+
+    http://github.com/liyanage/xcode-text-macros/
+*/
+
+(
+
+/* *********************************************************
+ * Strings
+ * *********************************************************/
+
+    {
+        Identifier = objc.string.format;
+        Name = "NSString With Format";
+        IsMenuItem = YES;
+        BasedOn = objc;
+        CompletionPrefix = sf;
+        TextString = "[NSString stringWithFormat:@\"<#!format!#>\", <#arguments#>]";
+        OnlyAtBOL = NO;
+    },
+    {
+        Identifier = objc.stringliteral;
+        BasedOn = objc;
+        IsMenuItem = YES;
+        Name = "String Literal";
+        TextString = "@\"<#!string!#>\"";
+        OnlyAtBOL = NO;
+    },
+    {
+        Identifier = objc.nsstring;
+        BasedOn = objc;
+        IsMenuItem = YES;
+        CompletionPrefix = "nss";
+        Name = "NSString *";
+        TextString = "NSString *";
+        OnlyAtBOL = NO;
+    },
+
+
+/* *********************************************************
+ * Containers
+ * *********************************************************/
+
+    {
+        Identifier = objc.array.mutable;
+        Name = "NSMutableArray *";
+        IsMenuItem = YES;
+        BasedOn = objc;
+        CompletionPrefix = nsma;
+        TextString = "NSMutableArray *";
+        OnlyAtBOL = YES;
+    },
+    {
+        Identifier = objc.array.mutable;
+        Name = "NSMutableArray *";
+        IsMenuItem = YES;
+        BasedOn = objc;
+        CompletionPrefix = nsma;
+        TextString = "NSMutableArray *";
+        OnlyAtBOL = NO;
+    },
+
+    {
+        Identifier = objc.array.mutable.array;
+        Name = "NSMutableArray array";
+        IsMenuItem = YES;
+        BasedOn = objc;
+        CompletionPrefix = nsmaa;
+        TextString = "[NSMutableArray array]";
+        OnlyAtBOL = NO;
+    },
+
+    {
+        Identifier = objc.dictionary.objectsandkeys;
+        Name = "NSDictionary with Objects and Keys";
+        IsMenuItem = YES;
+        BasedOn = objc;
+        CompletionPrefix = nsdok;
+        TextString = "[NSDictionary dictionaryWithObjectsAndKeys:<#(id)firstObject#>nil]";
+        OnlyAtBOL = NO;
+    },
+
+/* *********************************************************
+ * Properties
+ * *********************************************************/
+
+    {
+        Identifier = objc.property.declaration;
+        BasedOn = objc;
+		IncludeContexts = ( "xcode.lang.objcpp.interface", xcode.lang.objc.interface );
+	},
+    {
+        Identifier = objc.property.declaration.retain;
+        BasedOn = objc.property.declaration;
+        IsMenuItem = YES;
+        Name = "@property Declaration - retain";
+        TextString = "@property (retain) <#!type and name!#>;";
+        CompletionPrefix = "@pr";
+		CycleList = (
+			objc.property.declaration.retain,
+			objc.property.declaration.retain.iboutlet,
+			objc.property.declaration.assign,
+			objc.property.declaration.copy,
+		);
+        OnlyAtBOL = YES;
+    },
+    {
+        Identifier = objc.property.declaration.retain.iboutlet;
+        BasedOn = objc.property.declaration;
+        IsMenuItem = YES;
+        Name = "@property Declaration - IBOutlet";
+        TextString = "@property (retain) IBOutlet <#!type and name!#>;";
+        CompletionPrefix = "@pri";
+        OnlyAtBOL = YES;
+    },
+    {
+        Identifier = objc.property.declaration.assign;
+        BasedOn = objc.property.declaration;
+        IsMenuItem = YES;
+        Name = "@property Declaration - assign";
+        TextString = "@property (assign) <#!type and name!#>;";
+        CompletionPrefix = "@pra";
+        OnlyAtBOL = YES;
+    },
+    {
+        Identifier = objc.property.declaration.copy;
+        BasedOn = objc.property.declaration;
+        IsMenuItem = YES;
+        Name = "@property Declaration - copy";
+        TextString = "@property (copy) <#!type and name!#>;";
+        CompletionPrefix = "@prc";
+        OnlyAtBOL = YES;
+    },
+    {
+        Identifier = objc.property.synthesize;
+        BasedOn = objc;
+        IsMenuItem = YES;
+        Name = "@synthesize Property";
+        TextString = "@synthesize <#!name!#>;";
+        CompletionPrefix = "@syn";
+		CycleList = (
+			objc.property.synthesize,
+			objc.property.synthesize.ivar,
+		);
+        OnlyAtBOL = YES;
+		IncludeContexts = ( "xcode.lang.objc.implementation" );
+		ExcludeContexts = ( "xcode.lang.objc.block" );
+    },
+    {
+        Identifier = objc.property.synthesize.ivar;
+        BasedOn = objc.property.synthesize;
+        IsMenuItem = YES;
+        Name = "@synthesize Property, assign ivar";
+        TextString = "@synthesize <#!name!#> = <#ivar#>;";
+        CompletionPrefix = "@syni";
+        OnlyAtBOL = YES;
+    },
+    {
+        Identifier = objc.property.releasenil;
+        Name = "Release and nil ivar";
+        IsMenuItem = YES;
+        BasedOn = objc;
+        CompletionPrefix = rel;
+        OnlyAtBOL = YES;
+        TextString = "[<#!ivar!#> release], <#!ivar!#> = nil;";
+		IncludeContexts = ( xcode.lang.objc.implementation );
+    },
+
+/* *********************************************************
+ * NSLog
+ * *********************************************************/
+
+    {
+        Identifier = objc.log.0arg;
+        BasedOn = objc;
+        IsMenuItem = YES;
+        Name = "NSLog() Call";
+        TextString = "NSLog$(PreFunctionArgsSpacing)($(InFunctionArgsSpacing)@\"<#!message!#>\"$(InFunctionArgsSpacing));";
+        CompletionPrefix = log;
+        OnlyAtBOL = YES;
+        IncludeContexts = ( "xcode.lang.objc.block" );
+		CycleList = (
+			objc.log.0arg,
+			objc.log.1arg,
+		);
+    },
+    {
+        Identifier = objc.log.1arg;
+        BasedOn = objc;
+        IsMenuItem = YES;
+        Name = "NSLog() Call 1 Argument";
+        TextString = "NSLog$(PreFunctionArgsSpacing)($(InFunctionArgsSpacing)@\"<#message#> %@\", <#!argument!#>$(InFunctionArgsSpacing));";
+        CompletionPrefix = log1;
+        OnlyAtBOL = YES;
+        IncludeContexts = ( "xcode.lang.objc.block" );
+    },
+
+/* *********************************************************
+ * Control Statements
+ * *********************************************************/
+
+    {
+        Identifier = c.block.if.singlestatement;
+        BasedOn = c.block.if;
+        Name = "If Block Single Statement";
+        IsMenuItem = YES;
+        OnlyAtBOL = YES;
+        CompletionPrefix = iff;
+        CycleList = (
+            c.block.if.singlestatement,
+            c.block.if,
+            c.block.ifelse,
+        );
+        TextString = "$(Statement)\n\t<#!statement!#>\n";
+    },
+    {
+        Identifier = c.block.if;
+        BasedOn = c.block;
+        Command = "if";
+        Expressions = "<#condition#>";
+        Name = "If Block";
+        IsMenuItem = YES;
+        OnlyAtBOL = YES;
+        CompletionPrefix = if;
+        CycleList = (
+            c.block.if,
+            c.block.if.singlestatement,
+            c.block.ifelse,
+        );
+        TextString = "$(Statement) {\n\t<#!statements!#>\n}\n";
+    },
+/* *********************************************************
+ * Markers
+ * *********************************************************/
+
+    {
+        Identifier = objc.marker;
+        BasedOn = objc;
+        IsMenuItem = NO;
+		IncludeContexts = ( xcode.lang.objc.implementation, xcode.lang.objcpp.interface, xcode.lang.objc.interface, xcode.lang.objcpp.protocol );
+        TextString = "// $(MarkerName): <#!comment!#>";
+        OnlyAtBOL = NO;
+    },
+    {
+        Identifier = objc.marker.todo;
+        Name = "Mark TODO";
+        BasedOn = objc.marker;
+        MarkerName = "TODO";
+        CompletionPrefix = todo;
+    },
+    {
+        Identifier = objc.marker.todo.bol;
+        Name = "Mark TODO";
+        BasedOn = objc.marker.todo;
+        CompletionPrefix = todo;
+        OnlyAtBOL = YES;
+        IsMenuItem = YES;
+    },
+    {
+        Identifier = objc.marker.fixme;
+        Name = "Mark FIXME";
+        BasedOn = objc.marker;
+        MarkerName = "FIXME";
+        CompletionPrefix = fix;
+    },
+    {
+        Identifier = objc.marker.fixme.bol;
+        Name = "Mark FIXME";
+        BasedOn = objc.marker.fixme;
+        CompletionPrefix = fix;
+        OnlyAtBOL = YES;
+        IsMenuItem = YES;
+    },
+    {
+        Identifier = objc.marker.bang;
+        Name = "Mark !!!";
+        BasedOn = objc.marker;
+        MarkerName = "!!!";
+        CompletionPrefix = "fix2";
+    },
+    {
+        Identifier = objc.marker.bang.bol;
+        Name = "Mark !!!";
+        BasedOn = objc.marker.bang;
+        CompletionPrefix = "fix2";
+        OnlyAtBOL = YES;
+        IsMenuItem = YES;
+    },
+
+/* *********************************************************
+ * Grand Central Dispatch / Blocks
+ * *********************************************************/
+
+    {
+        Name = "dispatch_async() to Global Queue";
+        Identifier = objc.gcd.asyncglobal;
+        IsMenuItem = YES;
+        BasedOn = objc;
+        CompletionPrefix = "dia";
+        OnlyAtBOL = YES;
+		TextString = "dispatch_async(dispatch_get_global_queue(0, 0), ^{\n\t<#!statements!#>\n});";
+        CycleList = (
+        	objc.gcd.asyncglobal,
+        	objc.gcd.asyncmain,
+        	objc.gcd.syncmain,
+        );
+	},
+    {
+        Name = "dispatch_async() to Main Queue";
+        Identifier = objc.gcd.asyncmain;
+        IsMenuItem = YES;
+        BasedOn = objc;
+        CompletionPrefix = "diam";
+        OnlyAtBOL = YES;
+		TextString = "dispatch_async(dispatch_get_main_queue(), ^{\n\t<#!statements!#>\n});";
+	},
+    {
+        Name = "dispatch_sync() to Main Queue";
+        Identifier = objc.gcd.syncmain;
+        IsMenuItem = YES;
+        BasedOn = objc;
+        CompletionPrefix = "dis";
+        OnlyAtBOL = YES;
+		TextString = "dispatch_sync(dispatch_get_main_queue(), ^{\n\t<#!statements!#>\n});";
+	},
+    {
+        Name = "Block Literal";
+        Identifier = objc.gcd.block;
+        IsMenuItem = YES;
+        BasedOn = objc;
+        CompletionPrefix = "bl";
+        OnlyAtBOL = NO;
+		TextString = "^$(ArgumentList){\n\t<#!statements!#>\n}";
+        CycleList = (
+        	objc.gcd.block,
+        	objc.gcd.block.args,
+        	objc.gcd.block.comparator,
+        );
+	},
+    {
+        Name = "Block Literal - With Arguments";
+        Identifier = objc.gcd.block.args;
+        IsMenuItem = YES;
+        BasedOn = objc.gcd.block;
+        CompletionPrefix = "bla";
+        OnlyAtBOL = NO;
+		ArgumentList = "(<#arguments#>) ";
+	},
+    {
+        Name = "Block Literal - Comparator";
+        Identifier = objc.gcd.block.comparator;
+        IsMenuItem = YES;
+        BasedOn = objc.gcd.block;
+        CompletionPrefix = "blc";
+        OnlyAtBOL = NO;
+		ArgumentList = "(id obj1, id obj2) ";
+	},
+
+/* *********************************************************
+ * Methods
+ * *********************************************************/
+
+    {
+        Identifier = objc.method;
+        IsMenuItem = NO;
+        BasedOn = objc;
+        OnlyAtBOL = YES;
+		TextString = "$(Declaration)\n{\n\t<#!statements!#>\n}";
+		ExcludeContexts = ( xcode.lang.objc.block );
+	},
+
+    {
+        Identifier = objc.method.return;
+        Name = "Method Definition - Return Value no Parameters";
+        IsMenuItem = YES;
+        BasedOn = objc.method;
+        Declaration = "- (<#return type#>)<#method name#>";
+        CompletionPrefix = me;
+        CycleList = (
+        	objc.method.return,
+        	objc.method.void,
+        	objc.method.bool,
+        	objc.method.ibaction,
+			objc.method.generic,
+			objc.method.nsstring,
+        );
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objc.implementation );
+    },
+    {
+        Identifier = objc.method.return.declaration;
+        Name = "Method Declaration - Return Value no Parameters";
+        IsMenuItem = YES;
+        BasedOn = objc.method.return;
+        CompletionPrefix = "me";
+        TextString = "$(Declaration);";
+        CycleList = (
+        	objc.method.return.declaration,
+        	objc.method.void.declaration,
+        	objc.method.bool.declaration,
+        	objc.method.ibaction.declaration,
+			objc.method.generic.declaration,
+			objc.method.nsstring.declaration,
+        );
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objcpp.interface, xcode.lang.objc.interface, xcode.lang.objcpp.protocol );
+    },
+
+    {
+        Identifier = objc.method.void;
+        Name = "Method Definition - void";
+        IsMenuItem = YES;
+        BasedOn = objc.method;
+        Declaration = "- (void)<#method name#>";
+        CompletionPrefix = mev;
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objc.implementation );
+    },
+    {
+        Identifier = objc.method.void.declaration;
+        Name = "Method Declaration - void no Parameters";
+        IsMenuItem = YES;
+        BasedOn = objc.method.void;
+        CompletionPrefix = mev;
+        TextString = "$(Declaration);";
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objcpp.interface, xcode.lang.objc.interface, xcode.lang.objcpp.protocol );
+    },
+    {
+        Identifier = objc.method.bool;
+        Name = "Method Definition - BOOL";
+        IsMenuItem = YES;
+        BasedOn = objc.method;
+        Declaration = "- (BOOL)<#method name#>";
+        CompletionPrefix = meb;
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objc.implementation );
+    },
+    {
+        Identifier = objc.method.bool.declaration;
+        Name = "Method Declaration - BOOL";
+        IsMenuItem = YES;
+        BasedOn = objc.method.bool;
+        CompletionPrefix = meb;
+        TextString = "$(Declaration);";
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objcpp.interface, xcode.lang.objc.interface, xcode.lang.objcpp.protocol );
+    },
+
+    {
+        Identifier = objc.method.ibaction;
+        Name = "Method Definition - IBAction";
+        IsMenuItem = YES;
+        BasedOn = objc.method;
+        Declaration = "- (IBAction)<#method name#>:(id)sender";
+        CompletionPrefix = mei;
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objc.implementation );
+    },
+    {
+        Identifier = objc.method.ibaction.declaration;
+        Name = "Method Declaration - IBAction";
+        IsMenuItem = YES;
+        BasedOn = objc.method.ibaction;
+        CompletionPrefix = mei;
+        TextString = "$(Declaration);";
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objcpp.interface, xcode.lang.objc.interface, xcode.lang.objcpp.protocol );
+    },
+
+    {
+        Identifier = objc.method.generic;
+        Name = "Method Definition - Generic Method";
+        IsMenuItem = YES;
+        BasedOn = objc.method;
+        Declaration = "- (<#return type#>)<#method name#>:(<#parameter type 1#>)<#parameter name 1#>";
+        CompletionPrefix = meg;
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objc.implementation );
+    },
+    {
+        Identifier = objc.method.generic.declaration;
+        Name = "Method Declaration - Generic Method";
+        IsMenuItem = YES;
+        BasedOn = objc.method.generic;
+        CompletionPrefix = meg;
+        TextString = "$(Declaration);";
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objcpp.interface, xcode.lang.objc.interface, xcode.lang.objcpp.protocol );
+    },
+
+    {
+        Identifier = objc.method.nsstring;
+        Name = "Method Definition - NSString Return Value";
+        IsMenuItem = YES;
+        BasedOn = objc.method;
+        CompletionPrefix = mes;
+        Declaration = "- (NSString *)<#method name#>";
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objc.implementation );
+    },
+    {
+        Identifier = objc.method.nsstring.declaration;
+        Name = "Method Declaration - NSString Return Value";
+        IsMenuItem = YES;
+        BasedOn = objc.method.nsstring;
+        CompletionPrefix = mes;
+        TextString = "$(Declaration);";
+        OnlyAtBOL = YES;
+		IncludeContexts = ( xcode.lang.objcpp.interface, xcode.lang.objc.interface, xcode.lang.objcpp.protocol );
+    },
+
+    {
+        Identifier = objc.method.parameter;
+        Name = "Method Parameter";
+        IsMenuItem = YES;
+        BasedOn = objc.method;
+        TextString = "<#description#>:(<#type#>)<#name#>";
+        CompletionPrefix = para;
+        OnlyAtBOL = NO;
+		IncludeContexts = ( xcode.lang.objc.implementation, xcode.lang.objcpp.interface, xcode.lang.objc.interface, xcode.lang.objcpp.protocol );
+		ExcludeContexts = ( );
+    },
+
+    /* the built-in bracket expression macro has a space before the closing bracket that I don't like */
+    {
+        Identifier = objc.bracket;
+        BasedOn = objc;
+        IsMenuItem = YES;
+        Name = "Bracket Expression";
+        TextString = "[<#!expression!#>]";
+    },
+    {
+        Identifier = objc.selector;
+        BasedOn = objc;
+        IsMenuItem = YES;
+        Name = "@selector";
+        CompletionPrefix = sel;
+        TextString = "@selector(<#!selector!#>)";
+    },
+
+    {
+        Identifier = objc.nserror.creation;
+        Name = "NSError: creation";
+        IsMenuItem = YES;
+        BasedOn = objc;
+        TextString = "*<#theErr#> = [NSError errorWithDomain:<#theDomain#>\n\tcode:<#code#>\n\tuserInfo:[NSDictionary dictionaryWithObjectsAndKeys:\n\t\tNSLocalizedDescriptionKey,   NSLocalizedString(@\"<#description here#>\", @\"\"),\n\t\tnil]];";
+    },
+)
+
