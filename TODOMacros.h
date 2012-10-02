@@ -20,13 +20,29 @@
 #define MAGIC_NUMBER(x) (({ FIXME("Replace magic number " #x " with constant") }), (x))
 
 /* Usage example:
- *    NOT_IMPLEMENTED("This should show the details in a separate screen")
+ *     NOT_IMPLEMENTED("This should show the details in a separate screen")
  *
  * Call this in some IBAction that you will implement later, to generate a warning
  * at compile time AND display an alert at runtime if the user trigger the IBAction
  */
-#define NOT_IMPLEMENTED(warningMessage) [[[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%s",__PRETTY_FUNCTION__] \
+#define NOT_IMPLEMENTED(warningMessage) \
+        [[[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%s",__PRETTY_FUNCTION__] \
         message:[NSString stringWithFormat:@"%s",warningMessage] \
         delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease] show]; \
         TODO("Implement this - " warningMessage)
 
+
+/* Usage example:
+ *     #if TARGET_IPHONE_SIMULATOR
+ *     // Use some private API only in simulator to test my app memory mgmt, but _performMemoryWarning
+ *     // is a private method so the selector is undeclared so we want to disable the warning
+ *     DISABLE_WARNING(undeclared-selector,{
+ *       [[UIApplication sharedApplication] performSelector:@selector(_performMemoryWarning)];
+ *     })
+ *     #endif
+ */
+#define DISABLE_WARNING(warning,code) \
+  GENERATE_PRAGMA(clang diagnostic push) \
+  GENERATE_PRAGMA(clang diagnostic ignored "-W" #warning) \
+  code \
+  GENERATE_PRAGMA(clang diagnostic pop)
