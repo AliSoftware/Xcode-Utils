@@ -1,0 +1,3 @@
+PUBLIC_HEADERS_FOLDER_PATH = include/$(PROJECT_NAME)
+INSTALL_PATH               = /../BuildProductsPath/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/
+OTHER_LDFLAGS              = -ObjC
