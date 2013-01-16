@@ -4,7 +4,7 @@ This repository aims to share some useful resources for Xcode and other Develope
 
 This folder contains some File Templates so you can have a nice and homogeneous organization of your code in all your files.
 
-## [LibraryWithRsrc](Xcode-Utils/tree/master/LibraryWithRsrc) : Static Library **with Resource Bundle** to provide XIB, PNG & others
+## [LibraryWithRsrc](Xcode-Utils/tree/master/LibraryWithRsrc) : Static Library **with Resource Bundle**
 
 This is an example of how to create a Xcode projet that generate **both** a static library **and** a _resource bundle_.
 
