@@ -95,12 +95,12 @@ You can now **use `#import "YourLib/Header.h"` or `#import <YourLib/Header.h>` i
 ### Create the Resource Bundle target
 
 Since Xcode 4 does not provide a template to generate a Resource Bundle for iOS, you will use the template for OSX bundles
-and then need to adjust the Build Settings to adapt it:
+and then need to adjust its Build Settings to adapt it for iOS:
 
-* In your project that generates your static library, in addition to the "Static Library" target, add a New Target using the
-"Bundle" template of the OSX "Framework & Library" template section
+* In your project that generates your static library, in addition to the "Static Library" target, add a **New Target** using the
+**"Bundle" template of the OSX** "Framework & Library" template section
 * Go to the Build Settings of this newly generated template, and delete the following key
-  (i.e. select their line and hit the delete key, to remove the custom value propose and so that they use the default values instead):
+  (i.e. select their line and hit the delete key, to remove the custom value proposed, so that they use the default values instead):
   * `Base SDK`
   * `Architectures`
   * `OSX Deployment Target`
@@ -109,26 +109,29 @@ and then need to adjust the Build Settings to adapt it:
   * `COMBINE_HIDPI_IMAGES`
 * Set the `Skip Install` Build Settings to `YES` if not already
 * Remove the `".pch"` file (we are building a resource bundle, we won't have any code in this target)
-* In the `Info.plist` file, remove useless keys like `"pluginXXX"` and `"Executable File"`
+* In the `Info.plist` file of this template, remove useless keys like `"pluginXXX"` and `"Executable File"`
 
-Finally, you may reorganize the remaining files if needed (for example I often remove the `InfoPlist.strings` file and
-move the `Info.plist` file at some other place and remove the `Supporting Files` folder, just to keep stuff as clean as possible)
+_Finally, you may reorganize the remaining files to make thinks cleaner if you wish
+(for example I often remove the `InfoPlist.strings` file and move the `Info.plist` file at some other place,
+then remove the `Supporting Files` folder and its parent folder associated with the bundle target, etc)_
 
 Once this Resource Bundle target is configured:
 
-* Add it as an explicit dependency to your static library, so that every project (typically your host application projet) that is linked
+* **Add the bundle as an explicit dependency to your static library**, so that every project (typically your host application projet) that is linked
 and dependent to your static library will ensure first that the bundle has been compiled first.
-* Add your resource files (PNG, XIB, Localized.string, PLIST data files, xcdatamodel, …) to your bundle target so that
+* **Add your resource files** (PNG, XIB, Localized.string, PLIST data files, xcdatamodel, …) to your bundle target so that
   those resources will be embedded in the bundle
   
 ### Integrate the resource bundle in your application project
 
-* Build the bundle target once, for "iOS Device" (not for the simulator). The file should then change from red (inexistant)
+* **Build the bundle target once, for "iOS Device"** (not for the simulator). The file should then change from red (inexistant)
   to black (file exists) in the "Products" group in your Project Navigator on the left.
-* Select the generated bundle in the "Products" group in your Project Navigator, and right-click to choose "Show in Finder"
-* Once the generated bundle has been highlighted in the Finder, drag & drop it on Xcode, on the Project Navigator,
-  under your application's Xcode project (for example right below the ".a" static library you should have around here too).
+* Go to the **"Build Phases"** tab of your **application project** and expand the **"Copy Bundle Ressources"** section
+* **Drag the generated bundle** in the "Products" group (in your library project in your Project Navigator),
+  and **drop it in the "Copy Bundle Ressources"** section.
   _This way the resource bundle will be copied and embedded inside the generated application during the compilation._
+* In the Project Navigator, select the bundle you just added to your application project and change the "Location"
+  dropdown to **"Relative to Build Products"**
 
 > Note that since modifying a resource does not seem to modify the "modification date" of the bundle that contains the resource,
 Xcode may sometimes not detect that it needs to rebuild your resource bundle when a resource has been added to it or modified.
