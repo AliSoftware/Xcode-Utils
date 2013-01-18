@@ -1,3 +1,12 @@
+* [LibraryWithRsrc](#librarywithrsrc)
+* [Example usages](#example-usages)
+* [How to generate a clean an reusable library](#how-to-generate-a-clean-an-reusable-library)
+  * [Create a library project](#create-a-library-project)
+  * [Integrate the library in your application project](#integrate-the-library-in-your-application-project)
+* [How to generate a valid resource bundle](#how-to-generate-a-valid-resource-bundle)
+
+---
+
 ## LibraryWithRsrc
 
 This is an example of how to create a Xcode projet that generate **both** a static library **and** a _resource bundle_.
@@ -37,6 +46,43 @@ and other resources from the resource bundle (and not the resources of your futu
 All you will need to do to use them in your applications then is to link the application with the static library
 of course, and add the resource bundle that your project generated with the static library (thanks to a second, dedicated target)
 to the resources of your app.
+
+## How to generate a clean an reusable library
+
+> **Note**: this is not exactly the process I presented in my CocoaHeads presentation #12 in Rennes (17 Jan 2013) since I found this much better solution a bit later.
+> Contrary to what I told in my CocoaHeads presentation:
+
+> * There will be no need to fill the `HEADER_SEARCH_PATH` Build Setting in your application project
+> * We will use the "Copy Files" phase (and not the "Copy Headers" phase) as explained by Apple
+>   [here](http://developer.apple.com/library/ios/technotes/iOSStaticLibraries/iOSStaticLibraries.pdf) -- so we won't have to use a workaround involving the Installation Path of the lib to make it work in "Archive" mode.
+
+---
+
+### Create a library project
+
+* Create a **new project of type "Static Library"**, and add this project to your workspace
+	* If you don't have a workspace already, simply create a new workspace and add both your application project and this library project to it
+* Add your code (`.h` and `.m` files) to this project
+* Go in the **"Build Phase"** tab of your library project. You should have a **"Copy Files" phase** already provided by the project template. If this is not the case:
+	* Click on the "Add Phase" button at the bottom of this screen and choose "Copy Files"
+	* Choose "Products Directory" in the "Destination" dropdown menu
+	* Type `include/${PRODUCT_NAME}` in the "Subpath" field
+* **Add all your public headers to this phase** (by drag & dropping the `.h` files from the Project Navigator, or with the "+" button)
+	* You should only add public headers here: if you have a header that is not intended to be imported by applications that
+	  use your library, don't add it there. This way the application won't be able to `#import` your private headers that declare any private API.
+	* Don't forget to add headers to this phase each time you create a new `.h` file (that is intended to be public) in your library project!
+* **Build the library project for "iOS Device"** (not the simulator) once, to check that it builds correctly and to make Xcode know where it will be generated
+
+### Integrate the library in your application project
+
+* Select your application project in your workspace, and go to the **"Build Phases"** tab
+* Open the **"Link Binary With Libraries"** section and add your static library (`libSomething.a`) there (using the "+" button)
+* In your Project Navigator on the left of Xcode, select the new file reference (`libSomething.a`) that has been added to your application's xcodeproj
+  and in the File Inspector on the right, select **"Relative to Build Products"** in the "Location" dropdown.
+  _(This way you will ensure Xcode will detect implicit dependencies between your app and the library)_
+* In the **"Build Settings"** of your application's project, add the `-ObjC` flag to the `Other Linker Flags` setting
+
+You can now **use `#import "YourLib/Header.h"` or `#import <YourLib/Header.h>` in your application's code** and start calling your library methods.
 
 ## How to generate a valid resource bundle
 

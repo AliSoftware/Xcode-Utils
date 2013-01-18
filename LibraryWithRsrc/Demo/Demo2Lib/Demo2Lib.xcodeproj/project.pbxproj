@@ -14,6 +14,9 @@
 		0967A73616A324F200886818 /* CHLibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0967A71916A3206400886818 /* CHLibViewController.xib */; };
 		0967A73716A324F600886818 /* CocoaHeads.png in Resources */ = {isa = PBXBuildFile; fileRef = 0967A71C16A320CA00886818 /* CocoaHeads.png */; };
 		0967A73816A324F900886818 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0967A6F416A31B9D00886818 /* Localizable.strings */; };
+		09804E5C16A8DCD100ADC660 /* UIImage+Bundle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 09A22DE716A61CCD0056B9A8 /* UIImage+Bundle.h */; };
+		09804E5D16A8DCD300ADC660 /* Demo2Lib.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0967A6D316A3193700886818 /* Demo2Lib.h */; };
+		09804E5E16A8DCD500ADC660 /* CHLibViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0967A71716A3206400886818 /* CHLibViewController.h */; };
 		09A22DE516A61B460056B9A8 /* CocoaHeads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A22DE416A61B460056B9A8 /* CocoaHeads@2x.png */; };
 		09A22DEA16A61CCD0056B9A8 /* UIImage+Bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A22DE816A61CCD0056B9A8 /* UIImage+Bundle.m */; };
 /* End PBXBuildFile section */
@@ -35,6 +38,9 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				09804E5C16A8DCD100ADC660 /* UIImage+Bundle.h in CopyFiles */,
+				09804E5D16A8DCD300ADC660 /* Demo2Lib.h in CopyFiles */,
+				09804E5E16A8DCD500ADC660 /* CHLibViewController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +329,6 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Supporting Files/Demo2Lib-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -334,7 +339,6 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Supporting Files/Demo2Lib-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

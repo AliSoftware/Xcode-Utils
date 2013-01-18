@@ -7,8 +7,8 @@
 //
 
 #import "CHViewController.h"
-#import "Demo2Lib.h"
-#import "CHLibViewController.h"
+#import "Demo2Lib/Demo2Lib.h"
+#import "Demo2Lib/CHLibViewController.h"
 
 @interface CHViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;

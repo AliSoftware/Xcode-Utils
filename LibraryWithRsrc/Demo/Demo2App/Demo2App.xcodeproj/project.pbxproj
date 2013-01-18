@@ -300,9 +300,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Supporting Files/Demo2App-Prefix.pch";
-				HEADER_SEARCH_PATHS = ../Demo2Lib/Classes;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Demo2App-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -314,9 +312,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Supporting Files/Demo2App-Prefix.pch";
-				HEADER_SEARCH_PATHS = ../Demo2Lib/Classes;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Demo2App-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
