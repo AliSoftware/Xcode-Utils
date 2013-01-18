@@ -38,11 +38,6 @@ This file allows support for Objective-C Subscripting for SDKs prior to iOS SDK 
 
 If you compile your code with those older SDKs and need subscripting support anyway, simply include this file to have the definitions.
 
-## [Portable Static Library](Xcode-Utils/tree/master/Portable%20Static%20Library)
-
-This is a simple `xcconfig` file to easily configure your projects generating static libraries so that it install public headers correctly
-and works for both building and archiving.
-
 ## [`TODOMacros.h`](Xcode-Utils/tree/master/TODOMacros.h)
 
 A header defining a lot of useful macros like `TODO(x)`, `FIXME(x)`, `NOTE(x)` to generate nice warnings to let you know you will have
@@ -54,4 +49,4 @@ of the code that need more work to be done later.
 
 ## [Xcode3](Xcode-Utils/tree/master/Xcode3)
 
-Legacy templates and Text Macros (snippets) for Xcode3. Obsolete.
+Legacy templates and Text Macros (snippets) for Xcode3. Now obsolete.
